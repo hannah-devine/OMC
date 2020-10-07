@@ -70,6 +70,9 @@
             this.tl.to(intersects[i].object.scale, .5, { x: .5, ease: Expo.easeOut })
             this.tl.to(intersects[i].object.position, .5, { x: 2, ease: Expo.easeOut })
             this.tl.to(intersects[i].object.rotation, .5, { y: Math.PI * .5, ease: Expo.easeOut }, "=-1.5")
+
+            // wat als hier in plaats van object verplaatst en scales, dit kan opgenklikt worden en localstorage bla bla bla
+
         }
     }
 
@@ -79,8 +82,19 @@
     render();
 
 
+    const params = {
+        textField: "This is a placeholder text"
+    }
+
+    const gui = new dat.GUI();
+    gui.add(params, "textField").onFinishChange(function (value) {
+        //Do something with the new value
+    });
+
 
     const init = () => {
+
+
 
 
 
