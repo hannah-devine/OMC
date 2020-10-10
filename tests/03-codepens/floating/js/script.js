@@ -50,9 +50,8 @@
     const loader = new THREE.FontLoader();
     const textMesh = new THREE.Mesh();
     const createTypo = font => {
-        const wordtest = document.getElementsByClassName("word").value;
-        console.log(wordtest);
-        const word = "floating";
+        console.log(font);
+        const word = "hello";
         const typoProperties = {
             font: font,
             size: cubeSize,

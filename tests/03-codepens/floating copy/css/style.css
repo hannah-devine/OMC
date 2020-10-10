@@ -1,0 +1,23 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+body {
+	height: 100vh;
+	background-color: #4DD0E1; 
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+canvas {
+  display: block;
+}

@@ -31,18 +31,17 @@
         let scene, camera, renderer;
         let controls, fontLoader;
         let dirLight;
-        let fullNameMesh, sloganMesh;
+        let fullNameMesh;
         scene = new THREE.Scene();
         fontLoader = new THREE.FontLoader();
         fontLoader.load('https://threejs.org/examples/fonts/helvetiker_bold.typeface.json', function (font) {
             //  Creates the name mesh
-            fullNameMesh = createTextMesh(fullName, font, 80);
+            fullNameMesh = createTextMesh(fullName, font);
 
             //  Adds the name mesh and the slogan mesh to the scene
             scene.add(fullNameMesh);
 
         });
-
 
 
         // CAMERA AND SCENE SETUP
@@ -69,23 +68,12 @@
 
 
 
-
-
-        function render() {
-            //  RequestAnimationFrame(render) starts a loop that refreshes the scene everytime the screen refreshes (typically 60hz or 60 times per second). 
-            requestAnimationFrame(render);
-
-            //  Tells the render engine to render the scene with our scene object and camera object.
-            renderer.render(scene, camera);
-        }
-
-
-
         //  This function automates making a mesh object, and combing a geometry object with a material to make a mesh
-        function createTextMesh(text, font, size, mat) {
+        function createTextMesh(text, font) {
+            console.log(font);
             var geo = new THREE.TextGeometry(text, {
                 font: font,
-                size: size,
+                size: 80,
                 height: 5,
                 curveSegments: 12,
                 bevelEnabled: true,
@@ -96,8 +84,18 @@
             geo.center();
             geo.computeBoundingBox();
 
-            return new THREE.Mesh(geo, mat);
+            return new THREE.Mesh(geo);
         }
+
+
+        function render() {
+            //  RequestAnimationFrame(render) starts a loop that refreshes the scene everytime the screen refreshes (typically 60hz or 60 times per second). 
+            requestAnimationFrame(render);
+
+            //  Tells the render engine to render the scene with our scene object and camera object.
+            renderer.render(scene, camera);
+        }
+
 
 
 

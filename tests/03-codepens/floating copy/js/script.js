@@ -1,6 +1,3 @@
-let nameForm;
-
-
 {
 
 
@@ -28,43 +25,43 @@ let nameForm;
     const geometry = new THREE.BoxBufferGeometry(cubeSize, cubeSize, cubeSize); // BufferAttribute allows for more efficient passing of data to the GPU
     const material = new THREE.MeshNormalMaterial(); // Maps the normal vectors to RGB colors
     const group = new THREE.Group();
-    // for (let i = 0; i < 350; i++) {
-    //     const mesh = new THREE.Mesh(geometry, material);
-    //     const dist = farDist / 3;
-    //     const distDouble = dist * 2;
-    //     const tau = 2 * Math.PI; // One turn
+    for (let i = 0; i < 350; i++) {
+        const mesh = new THREE.Mesh(geometry, material);
+        const dist = farDist / 3;
+        const distDouble = dist * 2;
+        const tau = 2 * Math.PI; // One turn
 
-    //     mesh.position.x = Math.random() * distDouble - dist;
-    //     mesh.position.y = Math.random() * distDouble - dist;
-    //     mesh.position.z = Math.random() * distDouble - dist;
-    //     mesh.rotation.x = Math.random() * tau;
-    //     mesh.rotation.y = Math.random() * tau;
-    //     mesh.rotation.z = Math.random() * tau;
+        mesh.position.x = Math.random() * distDouble - dist;
+        mesh.position.y = Math.random() * distDouble - dist;
+        mesh.position.z = Math.random() * distDouble - dist;
+        mesh.rotation.x = Math.random() * tau;
+        mesh.rotation.y = Math.random() * tau;
+        mesh.rotation.z = Math.random() * tau;
 
-    //     // Manually control when 3D transformations recalculation occurs for better performance
-    //     mesh.matrixAutoUpdate = false;
-    //     mesh.updateMatrix();
+        // Manually control when 3D transformations recalculation occurs for better performance
+        mesh.matrixAutoUpdate = false;
+        mesh.updateMatrix();
 
-    //     group.add(mesh);
-    // }
-    // scene.add(group);
+        group.add(mesh);
+    }
+    scene.add(group);
 
-
-
-    const hallo = document.querySelector(`.hallo`);
-    console.log(hallo.textContent);
-    const word = hallo.textContent;
-
+    let nameForm = `Peter`;
 
     const handleSubmitForm = e => {
         e.preventDefault();
         nameForm = document.querySelector(`.firstname`).value;
         console.log(nameForm);
+
+        const loader = new THREE.FontLoader();
+        loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
+            createTypo(font, nameForm);
+        });
     }
 
 
     // CREATE TYPOGRAPHY
-    const loader = new THREE.FontLoader();
+    // const loader = new THREE.FontLoader();
     const textMesh = new THREE.Mesh();
     const createTypo = (font, nameForm) => {
         console.log(font);
@@ -83,23 +80,12 @@ let nameForm;
         };
 
         const text = new THREE.TextGeometry(word, typoProperties);
-        console.log(nameForm);
         textMesh.geometry = text;
         textMesh.material = material;
         textMesh.position.x = cubeSize * -2;
         textMesh.position.z = cubeSize * -1;
         scene.add(textMesh);
     };
-    loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", () => {
-        createTypo(test(), nameForm);
-    });
-
-
-    const test = async () => {
-        let font;
-        fetch('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json').then(res => res.json()).then((out) => { font = out; }).catch(err => console.error(err));
-        return font;
-    }
 
 
 
@@ -138,9 +124,9 @@ let nameForm;
         const rx = Math.sin(t * 0.7) * 0.5;
         const ry = Math.sin(t * 0.3) * 0.5;
         const rz = Math.sin(t * 0.2) * 0.5;
-        // group.rotation.x = rx;
-        // group.rotation.y = ry;
-        // group.rotation.z = rz;
+        group.rotation.x = rx;
+        group.rotation.y = ry;
+        group.rotation.z = rz;
         textMesh.rotation.x = rx;
         textMesh.rotation.y = ry;
         textMesh.rotation.z = rx; // Happy accident :) 
@@ -149,16 +135,23 @@ let nameForm;
     };
     render();
 
-
+    // RESIZE CANVAS
+    // This is buggy in some iOS...
+    // const resizeCanvas = () => {
+    // 	camera.aspect = window.innerWidth / window.innerHeight;
+    // 	camera.updateProjectionMatrix();
+    // 	renderer.setSize(window.innerWidth, window.innerHeight);
+    // };
+    // window.addEventListener("resize", resizeCanvas, false);
     const init = () => {
         // // render 1 keer oproepen om animatie te laten starten
         // render();
         // window.addEventListener('mousemove', onMouseMove);
         // // window.addEventListener('mousemove', mouseMoveHandler);
 
-        // luisteren naar het verzenden van het formulier
         const $form = document.querySelector(`.form-register`);
         $form.addEventListener(`submit`, handleSubmitForm);
+
     }
 
 
