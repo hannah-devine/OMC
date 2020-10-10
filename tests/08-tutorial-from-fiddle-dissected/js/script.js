@@ -26,6 +26,7 @@ const init = (FName) => {
     console.log("FName", fullName);
 
 
+    // CAMERA AND SCENE SETUP
     let scene, camera, renderer;
     let controls, fontLoader;
     let dirLight;
@@ -36,12 +37,9 @@ const init = (FName) => {
     camera.lookAt(scene.position);
 
 
-    //##################################################################################
-    //  Creates a new rendering engine, this takes the scene and camera data, renders everything and converts that into something the DOM can use. 
+
     renderer = new THREE.WebGLRenderer();
-    //  Sets the size of the render to the width and height of the window containing it.
     renderer.setSize(window.innerWidth, window.innerHeight);
-    //  Adds the DOM version of the render to the body of the webpage;
     body.appendChild(renderer.domElement);
 
     //##################################################################################
