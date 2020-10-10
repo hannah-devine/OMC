@@ -60,7 +60,6 @@ let nameForm = [];
         e.preventDefault();
         nameForm = document.querySelector(`.firstname`).value;
         console.log(nameForm);
-        return nameForm;
     }
 
 

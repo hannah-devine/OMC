@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <label>First Name</label>
+    <input type="text" placeholder="Enter your first name here..." , id="textbox-fname">
+
+    <label>Last Name</label>
+    <input type="text" placeholder="Enter your last name here..." , id="textbox-lname">
+
+    <label>Name Material</label>
+    <select id="name-material-select">
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+        <option value="Polka Dots">Polka Dots</option>
+    </select>
+
+    <label>Name Animation</label>
+    <select id="name-animation-select">
+        <option value="Stay Still">Stay Still</option>
+        <option value="Spin">Spin</option>
+        <option value="Grow and Shrink">Grow and Shrink</option>
+        <option value="Rotate">Rotate</option>
+    </select>
+
+    <br>
+
+    <label>Slogan</label>
+    <input type="text" placeholder="Enter your slogan here..." , id="textbox-slogan">
+
+    <label>Slogan Material</label>
+    <select id="slogan-material-select">
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+        <option value="Polka Dots">Polka Dots</option>
+    </select>
+
+    <label>Slogan Animation</label>
+    <select id="slogan-animation-select">
+        <option value="Stay Still">Stay Still</option>
+        <option value="Spin">Spin</option>
+        <option value="Grow and Shrink">Grow and Shrink</option>
+        <option value="Rotate">Rotate</option>
+    </select>
+
+    <br>
+
+    <label>Background</label>
+    <select id="background-select">
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+    </select>
+
+    <br>
+
+    <button id='render-btn'><strong>Render!</strong></button>
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script type="module" src="js/script.js"></script>
+</body>
+
+
+</html>
