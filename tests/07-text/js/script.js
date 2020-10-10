@@ -38,10 +38,6 @@
 
 
 
-    // .Raycasting is used for mouse picking(working out what objects in the 3d space the mouse is over) amongst other things.
-    let raycaster = new THREE.Raycaster();
-    // Class representing a 2D vector.
-    let mouse = new THREE.Vector2();
 
 
 
@@ -104,47 +100,6 @@
     console.log(camera);
     renderer.render(scene, camera);
     console.log(scene);
-
-    function onMouseMove(event) {
-        event.preventDefault();
-
-        // update the picking ray with the camera and mouse position
-        raycaster.setFromCamera(mouse, camera);
-
-        // calculate objects intersecting the picking ray
-        // this will return an array based on objects that have been intersected with where the mouse in the scene
-        let intersects = raycaster.intersectObjects(scene.children, true);
-        console.log(intersects);
-
-        for (var i = 0; i < intersects.length; i++) {
-            this.tl = new TimelineMax();
-            console.log(tl);
-
-            console.log(`hey`);
-
-            this.tl.to(intersects[i].object.scale, 1, { x: 2, ease: Expo.easeOut });
-            this.tl.to(intersects[i].object.scale, 0.5, { x: 0.5, ease: Expo.easeOut });
-            // this.tl.to(intersects[i].object.position, 0.5, { x: 2, ease: Expo.easeOut });
-            // // animation happens -1.5 secon\ds ahead before it normally would
-            // this.tl.to(intersects[i].object.rotation, 1, { y: Math.PI * 0.5, ease: Expo.easeOut }, "=-1.5");
-        }
-
-
-        // how to get mouse coordinate
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-    }
-
-    const handleSubmitForm = e => {
-        e.preventDefault();
-        // de inhoud van de tekstvelden ophalen via het attribute value
-        const firstname = document.querySelector(`.firstname`).value;
-        console.log(firstname);
-        localStorage.setItem('name', firstname);
-    }
-
-
 
 
     const init = () => {
