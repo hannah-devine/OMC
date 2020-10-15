@@ -27,8 +27,8 @@
     const group = new THREE.Group();
     for (let i = 0; i < 350; i++) {
         const mesh = new THREE.Mesh(geometry, material);
-        const dist = farDist / 3;
-        const distDouble = dist * 2;
+        const dist = farDist / 3; // 3000 -
+        const distDouble = dist * 2; // 3000 * 2
         const tau = 2 * Math.PI; // One turn
 
         mesh.position.x = Math.random() * distDouble - dist;

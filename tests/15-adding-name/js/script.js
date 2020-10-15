@@ -22,16 +22,34 @@
     camera.position.z = 800;
 
 
+    let geometry = new THREE.TorusKnotGeometry(100, 30, 1000, 160);
+    // let material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+    let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
+    let cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+
+    for (let index = 0; index < 100; index++) {
+        let cubes = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+
+        cubes.position.x = Math.random() * 100 - 50;
+        cubes.position.y = Math.random() * 60 - 50;
+        cubes.position.z = Math.random() * 40 - 30;
+        // cube.rotation.x += 0.1;
+        // cube.rotation.y += 0.1;
+        console.log(cubes);
+
+        scene.add(cubes);
+    }
+
+
+
     // CAMERA VERANDEREN MET ORBIT
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.update();
 
 
-    let geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-
-    let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
-    let cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
 
 
     let nameForm;
@@ -76,15 +94,14 @@
     const animate = () => {
         requestAnimationFrame(animate);
 
-        cube.rotation.x += .1;
-        cube.rotation.y += .01;
-
         textMesh.rotation.x += .01;
         textMesh.rotation.y += .01;
-        
-
+        cube.rotation.x += .1;
+        cube.rotation.y += .01;
         renderer.render(scene, camera);
     }
+
+
 
 
     const init = () => {

@@ -12,6 +12,7 @@
         farDist);
 
     camera.position.x = farDist * -2;
+    console.log(farDist * -2); // -20000
     camera.position.z = 500;
 
 
@@ -134,6 +135,7 @@
         // group.rotation.x = rx;
         // group.rotation.y = ry;
         // group.rotation.z = rz;
+        console.log(rx);
         textMesh.rotation.x = rx;
         textMesh.rotation.y = ry;
         textMesh.rotation.z = rx; // Happy accident :) 
@@ -147,7 +149,6 @@
     const init = () => {
         // je moete sowieso renderen
         render();
-
         const $form = document.querySelector(`.form-name`);
         $form.addEventListener(`submit`, handleSubmitForm);
 
