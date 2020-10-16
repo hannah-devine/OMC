@@ -40,7 +40,7 @@ import Vector from "./classes/Makemesh.js";
         const geometry = new THREE.BoxBufferGeometry(cubeSize, cubeSize, cubeSize); // BufferAttribute allows for more efficient passing of data to the GPU
         const group = new THREE.Group();
         for (let i = 0; i < 350; i++) {
-            meshes = new MakeMesh(geometry, material, fardist);
+            meshes = new MakeMesh(geometry, material, 10000);
             group.add(meshes);
         }
 

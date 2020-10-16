@@ -1,4 +1,6 @@
 
+import { makeMesh } from "./Makemesh.js";
+
 
 {
     const farDist = 10000;
@@ -23,42 +25,26 @@
     camera.position.z = 800;
 
 
-    // // let geometry = new THREE.TorusKnotGeometry(50, 15, 500, 80);
-    // let material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+
+
+
     let material = new THREE.MeshNormalMaterial();
-    // let cube = new THREE.Mesh(geometry, material);
-    // scene.add(cube);
 
 
     const group = new THREE.Group();
+    // let cubes;
     for (let index = 0; index < 100; index++) {
+
+        let material = new THREE.MeshNormalMaterial();
         let geometry = new THREE.BoxGeometry(10, 10, 10);
-        let cubes = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
-
-        cubes.position.x = Math.random() * 1000 - 500;
-        cubes.position.y = Math.random() * 900 - 500;
-        cubes.position.z = Math.random() * 400 - 300;
-        // cube.rotation.x += 0.1;
-
-        const tau = 2 * Math.PI; // One turn
-
-
-        // dit zet de positie random
-        // dit draait de kubusjes random op de x, y,z waarden
-        cubes.rotation.x = Math.random() * tau;
-        cubes.rotation.y = Math.random() * tau;
-        cubes.rotation.z = Math.random() * tau;
-
-
-        cubes.matrixAutoUpdate = false;
-        cubes.updateMatrix();
+        const farDist = 10000;
+        let cubes = makeMesh(geometry, material, farDist);
 
         console.log(cubes);
         group.add(cubes);
-
-
     }
     scene.add(group);
+
 
 
     // CAMERA VERANDEREN MET ORBIT
@@ -76,6 +62,8 @@
         nameForm = document.querySelector(`.firstname`).value;
         console.log(nameForm);
 
+
+
         const loader = new THREE.FontLoader();
         loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
             createTypo(font, nameForm);
@@ -90,7 +78,7 @@
         const word = nameForm;
         const typoProperties = {
             font: font,
-            size: 80,
+            size: 100,
             height: 5,
             curveSegments: 12,
             bevelEnabled: true,
@@ -103,35 +91,17 @@
         const text = new THREE.TextGeometry(word, typoProperties);
         textMesh.geometry = text;
         textMesh.material = material;
-        textMesh.position.x = -120;;
+        textMesh.position.x = -130;;
         scene.add(textMesh);
     };
 
 
     const animate = () => {
         requestAnimationFrame(animate);
-
-
-
         const t = Date.now() * 0.001; // Return the number of milliseconds since 1970 / 01 / 01:
-        // console.log(t);
         const rx = Math.sin(t * 0.7) * 0.5;
-        // console.log(rx);
         const ry = Math.sin(t * 0.3) * 0.5;
         const rz = Math.sin(t * 0.2) * 0.5;
-
-        // // dit zijn de kubussen
-        // group.rotation.x = rx;
-        // group.rotation.y = ry;
-        // group.rotation.z = rz;
-
-
-        // textMesh.rotation.x = rx;
-        // textMesh.rotation.y = ry;
-        // textMesh.rotation.z = rz;
-
-        // cube.rotation.x += .1;
-        // cube.rotation.y += .01;
         renderer.render(scene, camera);
     }
 
@@ -140,8 +110,6 @@
 
     const init = () => {
         animate();
-
-
 
         const $form = document.querySelector(`.form-name`);
         $form.addEventListener(`submit`, handleSubmitForm);

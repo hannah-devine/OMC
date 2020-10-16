@@ -1,11 +1,9 @@
 
-
 class MakeMesh {
-    constructor(geometry, material, fardist) {
-        console.log(h);
-        this.mesh = new THREE.Mesh(geometry, material, fardist);
+    constructor(geometry, material, farDist) {
+        this.mesh = new THREE.Mesh(geometry, material, farDist);
         this.dist = farDist / 3;
-        this.distDouble = dist * 2;
+        this.distDouble = this.dist * 2;
         this.tau = 2 * Math.PI; // One turn
     }
     meshAnimation() {
@@ -20,6 +18,7 @@ class MakeMesh {
         this.mesh.matrixAutoUpdate = false;
         this.mesh.updateMatrix();
 
+      
         return this.mesh;
     }
 }
