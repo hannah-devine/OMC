@@ -1,4 +1,4 @@
-import { meshPosition } from "./MeshPosition.js";
+import { meshPosition } from "./meshPosition.js";
 
 
 const makeMesh = (geometry, material, farDist) => {
