@@ -1,7 +1,7 @@
 
 
 import { createTypo } from "./functions/createTypo.js";
-import { creatingBoxes } from "./functions/createBoxes.js";
+import { createBoxes } from "./functions/createBoxes.js";
 import { createKnots } from "./functions/createKnots.js";
 import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
 
@@ -35,8 +35,16 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
 
+    const colorWire = '#18FFFF'; // blue
 
+    //ARRAY POSSIBLE MATERIALS FOR TEXT
+    const materials = [new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }), new THREE.MeshNormalMaterial(), new THREE.MeshStandardMaterial({ color: Math.random() * 0xffffff })];
+    const material = materials[Math.floor(Math.random() * materials.length)];
 
+    console.log(material);
+    //ARRAY POSSIBLE GEOMETRIES
+    const geometries = [new THREE.BoxBufferGeometry(10, 10, 10), new THREE.BoxBufferGeometry(40, 60, 40), new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.ConeBufferGeometry(15, 40, 62), new THREE.CylinderBufferGeometry(15, 15, 80, 62), new THREE.DodecahedronBufferGeometry(4, 4)];
+    const geometry = geometries[Math.floor(Math.random() * geometries.length)];
 
 
 
@@ -46,11 +54,11 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
     const handleSubmitForm = e => {
         e.preventDefault();
 
-        let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
-        scene.add(createBoxesRectangle(material));
+        // let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
+        scene.add(createBoxes(geometry));
 
         nameForm = document.querySelector(`.firstname`).value;
-        console.log(nameForm);
+
         const loader = new THREE.FontLoader();
         loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
             createTypo(font, nameForm, textMesh, material);
