@@ -2,8 +2,7 @@
 
 import { createTypo } from "./functions/createTypo.js";
 import { createBoxes } from "./functions/createBoxes.js";
-import { createKnots } from "./functions/createKnots.js";
-import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
+
 
 
 {
@@ -15,7 +14,8 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
     let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
     let renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    const colors = [`#e5e5e5`, `#FFE1DB`, `#DBFFE0`, `#9DFFFB`, `#95A7F9`, `#F7C767`, `#D64619`];
+    const colors = [`#e5e5e5`, `#FFE1DB`, `#DBFFE0`, `#9DFFFB`, `#95A7F9`, `#F7C767`, `#fceab8`];
+
     renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
 
     // en hiermee maken we een canvas aan in ons HTML
@@ -28,7 +28,7 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
     light.position.set(0, 500, 2000);
     scene.add(light);
 
-    // CAMERa
+    // CAMERA
     camera.position.z = 800;
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.update();
@@ -44,19 +44,22 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
 
     console.log(material);
     //ARRAY POSSIBLE GEOMETRIES
-    const geometries = [new THREE.BoxBufferGeometry(10, 10, 10), new THREE.BoxBufferGeometry(40, 30, 40), new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.ConeBufferGeometry(15, 40, 62), new THREE.CylinderBufferGeometry(15, 15, 80, 62), new THREE.DodecahedronBufferGeometry(4, 4), new THREE.CircleGeometry(50, 32), new THREE.TetrahedronBufferGeometry(15, 15)];
+    const geometries = [new THREE.BoxBufferGeometry(10, 10, 10), new THREE.BoxBufferGeometry(30, 30, 30), new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.ConeBufferGeometry(15, 40, 62), new THREE.CylinderBufferGeometry(15, 15, 50, 62), new THREE.DodecahedronBufferGeometry(4, 4), new THREE.CircleGeometry(50, 32), new THREE.TetrahedronBufferGeometry(15, 15), new THREE.TorusBufferGeometry(10, 3, 16, 100), new THREE.OctahedronBufferGeometry(3, 3)];
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
 
 
 
     // NAAM OPVANGEN EN 3D renderen
     const textMesh = new THREE.Mesh();
+    let test;
     let nameForm;
     const handleSubmitForm = e => {
         e.preventDefault();
 
         // let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
-        scene.add(createBoxes(geometry, farDist));
+        test = createBoxes(geometry, farDist)
+        console.log(test);
+        scene.add(test);
         nameForm = document.querySelector(`.firstname`).value;
 
 
@@ -70,14 +73,51 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
     scene.add(textMesh);
 
 
+    function onMouseMove(event) {
+        event.preventDefault();
+
+        // update the picking ray with the camera and mouse position
+        raycaster.setFromCamera(mouse, camera);
+
+        // calculate objects intersecting the picking ray
+        // this will return an array based on objects that have been intersected with where the mouse in the scene
+        let intersects = raycaster.intersectObjects(scene.children, true);
+        console.log(intersects);
+
+        for (let i = 0; i < intersects.length; i++) {
+            this.tl = new TimelineMax();
+            console.log(tl);
+
+            this.tl.to(intersects[i].object.scale, 0.2, { x: 2, ease: Expo.easeOut });
+            this.tl.to(intersects[i].object.scale, 0.5, { x: 0.5, ease: Expo.easeOut });
+            this.tl.to(intersects[i].object.position, 0.5, { x: 2, ease: Expo.easeOut });
+            // animation happens -1.5 secon\ds ahead before it normally would
+            this.tl.to(intersects[i].object.rotation, 1, { y: Math.PI * 0.5, ease: Expo.easeOut }, "=-1.5");
+        }
+
+
+        // how to get mouse coordinate
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    }
+
     const animate = () => {
+
         requestAnimationFrame(animate);
-
-
+        // console.log(test);
+        console.log(scene);
+        scene.children[0].rotation.x += 5
+        scene.rotation.x -= 0.00090;
+        scene.rotation.y += 0.00090;
         renderer.render(scene, camera);
 
 
     }
+
+
+
+
 
 
     // als nameForm leeg is dan clear ik het canvas
@@ -97,6 +137,7 @@ import { createBoxesRectangle } from "./functions/createBoxesRectangle.js";
 
         const $form = document.querySelector(`.form-name`);
         $form.addEventListener(`submit`, handleSubmitForm);
+        window.addEventListener('mousemove', onMouseMove);
 
 
     }
