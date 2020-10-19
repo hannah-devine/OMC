@@ -27,9 +27,6 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
 
-
-
-
   const farDist = 10000;
 
   //SETTING UP 3D SCENERY
@@ -60,37 +57,37 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   // ARRAY POSSIBLE MATERIALS FOR TEXT
   const materials = [new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }), new THREE.MeshNormalMaterial(), new THREE.MeshStandardMaterial({ color: Math.random() * 0xffffff })];
-  // const material = materials[Math.floor(Math.random() * materials.length)];
 
-  let points = [];
-  for (let i = 0; i < 10; i++) {
-    points.push(new THREE.Vector2(Math.sin(i * 0.2) * 10 + 5, (i - 5) * 2));
-  }
+  // .Raycasting is used for mouse picking(working out what objects in the 3d space the mouse is over) amongst other things.
+  let raycaster = new THREE.Raycaster();
+  // Class representing a 2D vector.
+  let mouse = new THREE.Vector2();
+
+
+
 
   //ARRAY POSSIBLE GEOMETRIES
-  const geometries = [new THREE.BoxBufferGeometry(10, 10, 10), new THREE.BoxBufferGeometry(12, 12, 12),
+  const geometries = [new THREE.BoxBufferGeometry(10, 10, 10), new THREE.BoxBufferGeometry(17, 17, 17),
   new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.ConeBufferGeometry(15, 40, 62),
-  new THREE.CylinderBufferGeometry(15, 15, 50, 62), new THREE.DodecahedronBufferGeometry(4, 4),
+  new THREE.CylinderBufferGeometry(15, 15, 50, 62), new THREE.DodecahedronBufferGeometry(18, 18),
   new THREE.CircleGeometry(15, 32), new THREE.TetrahedronBufferGeometry(15, 15),
-  new THREE.TorusBufferGeometry(10, 3, 16, 100), new THREE.OctahedronBufferGeometry(3, 3), new THREE.IcosahedronBufferGeometry(10, 10), new THREE.LatheBufferGeometry(points), new THREE.SphereBufferGeometry(15, 32, 32)];
+  new THREE.TorusBufferGeometry(10, 3, 16, 100), new THREE.OctahedronBufferGeometry(3, 3), new THREE.IcosahedronBufferGeometry(15, 15), new THREE.SphereBufferGeometry(15, 32, 32)];
+
 
 
 
   // NAAM OPVANGEN EN 3D renderen
   const textMesh = new THREE.Mesh();
-  let shapes;
   let nameForm;
+  const group = new THREE.Group();
   recognition.onresult = (event) => {
     nameForm = event.results[0][0].transcript;
     console.log(nameForm);
-    // let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
     const material = materials[Math.floor(Math.random() * materials.length)];
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
-    shapes = createBoxes(geometry, farDist)
-    scene.add(shapes);
-    // nameForm = document.querySelector(`.firstname`).value;
+    createBoxes(group, geometry, farDist)
 
-    renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
+
 
     const loader = new THREE.FontLoader();
     loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
@@ -98,7 +95,34 @@ import { createBoxes } from "./functions/createBoxes.js";
     });
 
   }
+
+
+
   scene.add(textMesh);
+  scene.add(group);
+
+
+
+  const handleMouseMove = (event) => {
+    event.preventDefault();
+    // update the picking ray with the camera and mouse position
+    raycaster.setFromCamera(mouse, camera);
+    let intersects = raycaster.intersectObjects(scene.children, true);
+
+    for (let i = 0; i < intersects.length; i++) {
+      const randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+      intersects[i].object.material.color.set(randomColor);
+      intersects[i].object.material.wireframe = true;
+      // intersects[i].object.material.scale = 3;
+      console.log(intersects[i].object.material);
+    }
+
+
+    // how to get mouse coordinate
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+  }
 
 
 
@@ -108,6 +132,9 @@ import { createBoxes } from "./functions/createBoxes.js";
     scene.children[0].rotation.x += 5;
     scene.rotation.x -= 0.00090;
     scene.rotation.y += 0.00090;
+    // group.rotation.x = Date.now() * 0.00005;
+    // group.rotation.y = Date.now() * 0.000025;
+    // group.position.z += 1;
 
     renderer.render(scene, camera);
   }
@@ -119,10 +146,12 @@ import { createBoxes } from "./functions/createBoxes.js";
   const init = () => {
     animate();
 
+    window.addEventListener('mousemove', handleMouseMove);
 
     document.querySelector(`body`).addEventListener(`click`, () => {
       recognition.start();
       console.log('Ready to receive a name command.');
+      renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
     })
 
 

@@ -1,5 +1,4 @@
 import { meshPosition } from "./meshPosition.js";
-import { meshPositionTwo } from "./meshPosition2.js";
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
 
 const makeMesh = (geometry, material, farDist) => {

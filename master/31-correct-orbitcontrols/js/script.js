@@ -1,4 +1,5 @@
-
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
 
 import { createTypo } from "./functions/createTypo.js";
 import { createBoxes } from "./functions/createBoxes.js";
@@ -23,9 +24,6 @@ import { createBoxes } from "./functions/createBoxes.js";
   recognition.maxAlternatives = 1;
 
   const $diagnostic = document.querySelector('.output');
-
-
-
 
 
 
@@ -54,7 +52,7 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   // CAMERA
   camera.position.z = 800;
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new OrbitControls(camera, renderer.domElement);
   controls.update();
 
   // ARRAY POSSIBLE MATERIALS FOR TEXT
@@ -85,6 +83,7 @@ import { createBoxes } from "./functions/createBoxes.js";
     // let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
     const material = materials[Math.floor(Math.random() * materials.length)];
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+    
     shapes = createBoxes(geometry, farDist)
     scene.add(shapes);
     // nameForm = document.querySelector(`.firstname`).value;

@@ -1,7 +1,9 @@
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
 import { makeMesh } from "./makeMesh.js";
 
-const createBoxes = (geometry, farDist) => {
-    const group = new THREE.Group();
+
+const createBoxes = (group, geometry, farDist) => {
+
     for (let index = 0; index < 300; index++) {
         let material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
         // let geometry = new THREE.BoxGeometry(10, 10, 10);
@@ -10,7 +12,7 @@ const createBoxes = (geometry, farDist) => {
         group.add(cubes);
     }
 
-    console.log(group);
+    // console.log(group);
     return group;
 }
 
