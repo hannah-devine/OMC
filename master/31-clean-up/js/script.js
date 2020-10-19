@@ -1,4 +1,5 @@
-
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
 
 import { createTypo } from "./functions/createTypo.js";
 import { createBoxes } from "./functions/createBoxes.js";
@@ -54,7 +55,7 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   // CAMERA
   camera.position.z = 800;
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new OrbitControls(camera, renderer.domElement);
   controls.update();
 
   // ARRAY POSSIBLE MATERIALS FOR TEXT

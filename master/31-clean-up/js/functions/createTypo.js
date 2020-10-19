@@ -1,4 +1,5 @@
 // CREATE TYPOGRAPHY
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
 
 const createTypo = (font, nameForm, textMesh, material) => {
     const word = nameForm;
