@@ -1,7 +1,7 @@
 // CREATE TYPOGRAPHY
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
 
-const createTypo = (font, nameForm, textMesh, material) => {
+const createTypo = (font, nameForm, textMesh, material, center) => {
     const word = nameForm;
     const typoProperties = {
         font: font,
@@ -19,7 +19,7 @@ const createTypo = (font, nameForm, textMesh, material) => {
     const text = new THREE.TextGeometry(word, typoProperties);
     textMesh.geometry = text;
     textMesh.material = material;
-    textMesh.position.x = -130;;
+    textMesh.position.x = center;
     textMesh.position.z = 130;
 
     return textMesh;

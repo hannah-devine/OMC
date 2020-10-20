@@ -6,7 +6,7 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 {
 
-
+  // ik weet het er staat hier var, maar dat komt omdat het met const of let niet werkt.
   var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
   var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
   var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -28,18 +28,20 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
   const farDist = 10000;
+  const sizeText = 300;
 
   //SETTING UP 3D SCENERY
   let scene = new THREE.Scene();
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, farDist);
   let renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight - sizeText);
   const colors = [`#e5e5e5`, `#FFE1DB`, `#DBFFE0`, `#9DFFFB`, `#95A7F9`, `#F7C767`, `#fceab8`];
   renderer.setClearColor(`#e5e5e5`);
 
 
   // en hiermee maken we een canvas aan in ons HTML
   document.body.appendChild(renderer.domElement);
+
 
   //LIGHTS
   const ambientLight = new THREE.AmbientLight(0x0f0f0f);
@@ -51,7 +53,7 @@ import { createBoxes } from "./functions/createBoxes.js";
   scene.add(hemisphereLight);
 
   // CAMERA
-  camera.position.z = 800;
+  camera.position.z = 1000;
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.update();
 
@@ -63,15 +65,7 @@ import { createBoxes } from "./functions/createBoxes.js";
   // Class representing a 2D vector.
   let mouse = new THREE.Vector2();
 
-  let scale = [];
 
-
-  // //ARRAY POSSIBLE GEOMETRIES
-  // const geometries = [new THREE.BoxBufferGeometry(sizes[0], sizes[1], 50), new THREE.BoxBufferGeometry(sizes[0], sizes[1], 50),
-  // new THREE.TorusKnotGeometry(sizes[0], sizes[1], 100, 16), new THREE.ConeBufferGeometry(sizes[0], sizes[1], 62),
-  // new THREE.CylinderBufferGeometry(sizes[0], sizes[1], 50, 62), new THREE.DodecahedronBufferGeometry(sizes[0], sizes[1]),
-  // new THREE.CircleGeometry(sizes[0], sizes[1]), new THREE.TetrahedronBufferGeometry(sizes[0], sizes[1]),
-  // new THREE.TorusBufferGeometry(sizes[0], sizes[1], 30, 100), new THREE.OctahedronBufferGeometry(sizes[0], sizes[1]), new THREE.IcosahedronBufferGeometry(sizes[0], sizes[1]), new THREE.SphereBufferGeometry(sizes[0], sizes[1], 32)];
 
 
   //ARRAY POSSIBLE GEOMETRIES
@@ -91,15 +85,16 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   const handleSubmitForm = e => {
     e.preventDefault();
+    renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
+    const amount = document.querySelector(`.amount`).value;
     const width = document.querySelector(`.width`).value;
     const height = document.querySelector(`.height`).value;
-    // scale.push(width, height);
+
 
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
-    createBoxes(group, geometry, farDist, width);
+    createBoxes(group, geometry, farDist, amount, width, height);
 
   }
-
 
 
 
@@ -108,22 +103,18 @@ import { createBoxes } from "./functions/createBoxes.js";
   let nameForm;
   const group = new THREE.Group();
   recognition.onresult = (event) => {
-
+    console.log(`a`);
     nameForm = event.results[0][0].transcript;
     console.log(nameForm);
     const material = materials[Math.floor(Math.random() * materials.length)];
-    const geometry = geometries[Math.floor(Math.random() * geometries.length)];
 
-
-
-
+    const center = -window.innerWidth / 5;
     const loader = new THREE.FontLoader();
     loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
-      createTypo(font, nameForm, textMesh, material);
+      createTypo(font, nameForm, textMesh, material, center);
     });
 
   }
-
 
 
   scene.add(textMesh);
@@ -145,7 +136,6 @@ import { createBoxes } from "./functions/createBoxes.js";
       console.log(intersects[i].object.material);
     }
 
-
     // how to get mouse coordinate
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
@@ -157,14 +147,14 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   const animate = () => {
 
-
     requestAnimationFrame(animate);
     scene.children[0].rotation.x += 5;
     scene.rotation.x -= 0.00090;
     scene.rotation.y += 0.00090;
-    group.rotation.x = Date.now() * 0.00005;
-    group.rotation.y = Date.now() * 0.000025;
-    group.position.z += 1;
+    group.rotation.x = Date.now() * 0.000005;
+    group.rotation.y = Date.now() * 0.0000025;
+
+
 
     renderer.render(scene, camera);
   }
@@ -183,13 +173,11 @@ import { createBoxes } from "./functions/createBoxes.js";
     document.querySelector(`.listen`).addEventListener(`click`, () => {
       recognition.start();
       console.log('Ready to receive a name command.');
-      renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
     })
 
 
     const $form = document.querySelector(`.form-size`);
     $form.addEventListener(`submit`, handleSubmitForm);
-
 
 
     recognition.onspeechend = () => {

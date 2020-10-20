@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1 class="title">Click and say your name</h1>
+    <h1 class="title">Click on the button to see your name in 3D</h1>
 
     <p class="hints"></p>
     <div>
@@ -25,13 +25,18 @@
     <form class="form-size" action="index.html" method="get">
 
         <div class="form-general__field">
+            <label>How many shapes do you want?
+                <input type="number" name="amount" class="amount" value="50">
+            </label>
+        </div>
+        <div class="form-general__field">
             <label>How wide do you want your shapes to be?
-                <input type="number" name="width" class="width" value="10">
+                <input type="number" name="width" class="width" value="3">
             </label>
         </div>
         <div class="form-general__field">
             <label>How heigh do you want your shapes to be?
-                <input type="number" name="height" class="height" value="10">
+                <input type="number" name="height" class="height" value="3">
             </label>
         </div>
         <div class="form-general__field">
