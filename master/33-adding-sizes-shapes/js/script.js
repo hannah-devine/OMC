@@ -63,7 +63,15 @@ import { createBoxes } from "./functions/createBoxes.js";
   // Class representing a 2D vector.
   let mouse = new THREE.Vector2();
 
+  let scale = [];
 
+
+  // //ARRAY POSSIBLE GEOMETRIES
+  // const geometries = [new THREE.BoxBufferGeometry(sizes[0], sizes[1], 50), new THREE.BoxBufferGeometry(sizes[0], sizes[1], 50),
+  // new THREE.TorusKnotGeometry(sizes[0], sizes[1], 100, 16), new THREE.ConeBufferGeometry(sizes[0], sizes[1], 62),
+  // new THREE.CylinderBufferGeometry(sizes[0], sizes[1], 50, 62), new THREE.DodecahedronBufferGeometry(sizes[0], sizes[1]),
+  // new THREE.CircleGeometry(sizes[0], sizes[1]), new THREE.TetrahedronBufferGeometry(sizes[0], sizes[1]),
+  // new THREE.TorusBufferGeometry(sizes[0], sizes[1], 30, 100), new THREE.OctahedronBufferGeometry(sizes[0], sizes[1]), new THREE.IcosahedronBufferGeometry(sizes[0], sizes[1]), new THREE.SphereBufferGeometry(sizes[0], sizes[1], 32)];
 
 
   //ARRAY POSSIBLE GEOMETRIES
@@ -72,6 +80,25 @@ import { createBoxes } from "./functions/createBoxes.js";
   new THREE.CylinderBufferGeometry(15, 15, 50, 62), new THREE.DodecahedronBufferGeometry(18, 18),
   new THREE.CircleGeometry(15, 32), new THREE.TetrahedronBufferGeometry(15, 15),
   new THREE.TorusBufferGeometry(10, 3, 16, 100), new THREE.OctahedronBufferGeometry(3, 3), new THREE.IcosahedronBufferGeometry(15, 15), new THREE.SphereBufferGeometry(15, 32, 32)];
+
+
+
+
+
+
+
+
+
+  const handleSubmitForm = e => {
+    e.preventDefault();
+    const width = document.querySelector(`.width`).value;
+    const height = document.querySelector(`.height`).value;
+    // scale.push(width, height);
+
+    const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+    createBoxes(group, geometry, farDist, width);
+
+  }
 
 
 
@@ -88,12 +115,6 @@ import { createBoxes } from "./functions/createBoxes.js";
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
 
 
-    // console.log(scene.children[4].children);
-    // if (scene.children[4].children.length > 1) {
-    //   scene.remove(scene.children[4]);
-    // }
-
-    createBoxes(group, geometry, farDist);
 
 
     const loader = new THREE.FontLoader();
@@ -141,9 +162,9 @@ import { createBoxes } from "./functions/createBoxes.js";
     scene.children[0].rotation.x += 5;
     scene.rotation.x -= 0.00090;
     scene.rotation.y += 0.00090;
-    // group.rotation.x = Date.now() * 0.00005;
-    // group.rotation.y = Date.now() * 0.000025;
-    // group.position.z += 1;
+    group.rotation.x = Date.now() * 0.00005;
+    group.rotation.y = Date.now() * 0.000025;
+    group.position.z += 1;
 
     renderer.render(scene, camera);
   }
@@ -159,11 +180,16 @@ import { createBoxes } from "./functions/createBoxes.js";
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    document.querySelector(`body`).addEventListener(`click`, () => {
+    document.querySelector(`.listen`).addEventListener(`click`, () => {
       recognition.start();
       console.log('Ready to receive a name command.');
       renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
     })
+
+
+    const $form = document.querySelector(`.form-size`);
+    $form.addEventListener(`submit`, handleSubmitForm);
+
 
 
     recognition.onspeechend = () => {

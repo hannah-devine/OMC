@@ -1,0 +1,29 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+body {
+  font-size: 2rem;
+  font-family: Georgia;
+  margin: 0;
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+.title{
+  font-size: 4rem;
+  color:purple;
+  display: block;
+}
+

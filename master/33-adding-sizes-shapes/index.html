@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.webapp">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Name-generator</title>
+</head>
+
+<body>
+    <h1 class="title">Click and say your name</h1>
+
+    <p class="hints"></p>
+    <div>
+        <p class="output"></p>
+    </div>
+
+    <div class="form-general__field">
+        <input type="submit" value="listen" class="listen">
+    </div>
+
+    <form class="form-size" action="index.html" method="get">
+
+        <div class="form-general__field">
+            <label>How wide do you want your shapes to be?
+                <input type="number" name="width" class="width" value="10">
+            </label>
+        </div>
+        <div class="form-general__field">
+            <label>How heigh do you want your shapes to be?
+                <input type="number" name="height" class="height" value="10">
+            </label>
+        </div>
+        <div class="form-general__field">
+            <input type="submit" value="Determine width" class="form-general__submit-button">
+        </div>
+
+    </form>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <!-- <script type="module" src="js/script.js"></script> -->
+
+</body>
+
+</html>
