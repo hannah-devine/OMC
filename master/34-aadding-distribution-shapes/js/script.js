@@ -94,6 +94,10 @@ import { createBoxes } from "./functions/createBoxes.js";
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
     createBoxes(group, geometry, farDist, distUser, amount, width, height);
     scene.add(group);
+
+
+
+
   }
 
 
@@ -160,6 +164,7 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
 
+
   const animate = () => {
 
     requestAnimationFrame(animate);
@@ -193,6 +198,7 @@ import { createBoxes } from "./functions/createBoxes.js";
     $form.addEventListener(`submit`, handleSubmitForm);
 
 
+
     recognition.onspeechend = () => {
       recognition.stop();
     }
@@ -205,8 +211,9 @@ import { createBoxes } from "./functions/createBoxes.js";
       $diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
     }
 
-    // kan de scenen nog niet leegmaken!
+
     document.querySelector(`.clear`).addEventListener(`click`, handleClear);
+
 
 
   }
