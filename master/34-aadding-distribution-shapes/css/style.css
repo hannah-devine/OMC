@@ -1,0 +1,55 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+body {
+  font-size: 2rem;
+  font-family: Georgia;
+  margin: 0;
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+.title{
+  display: block;
+  margin:0.4rem;
+}
+
+.form-general__submit-button{
+  padding:1.1rem;
+  background: rgba(63,94,251,1);
+  border: none;
+  color:white;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  border-radius: 50rem 50rem;
+  margin: 0.8rem;
+}
+
+.form-general__clear-button{
+  padding:0.8rem;
+  background: rgb(154, 156, 165);
+  border: none;
+  color:white;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  border-radius: 50rem 50rem;
+  margin: 0.8rem;
+  margin-bottom:2rem;
+}
+
+.form-general__field{
+  margin-bottom: 0.4rem;
+}
+
