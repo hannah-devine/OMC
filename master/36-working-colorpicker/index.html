@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.webapp">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Name-generator</title>
+</head>
+
+<body>
+    <div class="container">
+    <article class="article__listen">
+        <h1 class="title hidden">Say your name</h1>
+        <h2 class="subtitle">Tap and say your name</h2>
+        <p class="hints"></p>
+        <div>
+            <p class="output"></p>
+        </div>
+
+        <div class="form-general__field">
+            <input type="submit" value="tap here" class="listen form-general__submit-button">
+        </div>
+    </article>
+    <article class="article__form">
+        <h2 class="subtitle form-subtitle">Create 3D shapes</h2>
+        <form class="form-options" action="index.html" method="get">
+        
+            <div class="form-general__field">
+                <label class="label">Amount 
+                    <input type="number" name="amount" class="amount" value="20">
+                </label>
+            </div>
+            <div class="form-general__field">
+                <label class="label">Width
+                    <input type="number" name="width" class="width" min="0" max="50" value="5">
+                </label>
+            </div>
+            <div class="form-general__field">
+                <label class="label">Height
+                    <input type="number" name="height" class="height" min="0" max="50" value="5">
+                </label>
+            </div>
+            <div class="form-general__field">
+                <label class="label">Choose shapes are distributed
+                    <input type="number" name="dist" class="dist" min="0" max="40" value="20">
+                </label>
+            </div>
+            <div class="form-general__field">
+                <input type="submit" value="Make shapes" class="form-general__submit-button">
+                <button class="clear form-general__clear-button">clear shapes</button>
+            </div>
+            
+        </form>
+    </article>
+    
+
+        <article class="article__extra">
+            <h2 class="subtitle subitle--extra">Color and music</h2>
+            <div class="form-general__field">
+                <label class="label color-label ">Color Picker</label>
+                <input class="color" id="color" type="color" />
+            </div>
+            <div class="form-general__field">
+                <p class="label color-label ">Music</p>
+                <button class="play form-general__music form-general__clear-button">play background music</button>
+                <button class="stop form-general__music form-general__clear-button">stop music</button>
+            </div>
+    </article>
+</div>
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script> -->
+    <script type="module" src="js/script.js"></script>
+    <!-- <script type="module" src="js/script.js"></script> -->
+
+</body>
+
+</html>

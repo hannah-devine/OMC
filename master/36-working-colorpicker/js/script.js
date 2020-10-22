@@ -70,10 +70,10 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   //ARRAY POSSIBLE GEOMETRIES
   const geometries = [new THREE.BoxBufferGeometry(10, 10, 10), new THREE.BoxBufferGeometry(17, 17, 17),
-  new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.ConeBufferGeometry(15, 40, 62),
+  new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.ConeBufferGeometry(15, 20, 62),
   new THREE.CylinderBufferGeometry(15, 15, 50, 62), new THREE.DodecahedronBufferGeometry(18, 18),
-  new THREE.CircleGeometry(15, 32), new THREE.TetrahedronBufferGeometry(15, 15),
-  new THREE.TorusBufferGeometry(10, 3, 16, 100), new THREE.OctahedronBufferGeometry(3, 3), new THREE.IcosahedronBufferGeometry(15, 15), new THREE.SphereBufferGeometry(15, 32, 32)];
+  new THREE.CircleGeometry(15, 15), new THREE.TetrahedronBufferGeometry(15, 15),
+  new THREE.TorusBufferGeometry(10, 3, 16, 100), new THREE.OctahedronBufferGeometry(3, 3), new THREE.IcosahedronBufferGeometry(10, 10), new THREE.SphereBufferGeometry(10, 150, 32)];
 
 
   let sound;
@@ -184,9 +184,9 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   const animate = () => {
     requestAnimationFrame(animate);
-    // scene.children[0].rotation.x += 5;
-    // scene.rotation.x += 0.00090;
-    // scene.rotation.y += 0.00090;
+    scene.children[0].rotation.x += 5;
+    scene.rotation.x += 0.00090;
+    scene.rotation.y += 0.00090;
     group.rotation.x = Date.now() * 0.00005;
     group.rotation.y = Date.now() * 0.00025;
 
@@ -216,7 +216,7 @@ import { createBoxes } from "./functions/createBoxes.js";
     })
 
 
-    const $form = document.querySelector(`.form-size`);
+    const $form = document.querySelector(`.form-options`);
     $form.addEventListener(`submit`, handleSubmitForm);
 
 
