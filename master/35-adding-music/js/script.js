@@ -137,6 +137,7 @@ import { createBoxes } from "./functions/createBoxes.js";
 
   recognition.onresult = (event) => {
     console.log(`a`);
+    sound.pause();
     nameForm = event.results[0][0].transcript;
     console.log(nameForm);
     const material = materials[Math.floor(Math.random() * materials.length)];
