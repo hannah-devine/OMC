@@ -9,7 +9,7 @@ const meshPosition = (mesh, dist, distDouble, tau, width, height) => {
     mesh.rotation.z = Math.random() * tau;
     mesh.scale.x = width;
     mesh.scale.y = height;
-    // mesh.scale.z = 50;
+    mesh.scale.z = width;
     // console.log(mesh.geometry.scale.x);
 
 

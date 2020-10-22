@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-general__field">
-        <input type="submit" value="listen" class="listen">
+        <input type="submit" value="listen" class="listen form-general__submit-button">
     </div>
 
     <form class="form-size" action="index.html" method="get">
@@ -31,20 +31,21 @@
         </div>
         <div class="form-general__field">
             <label>How wide do you want your shapes to be?
-                <input type="number" name="width" class="width" value="3">
+                <input type="number" name="width" class="width" min="0" max="50" value="3">
             </label>
         </div>
         <div class="form-general__field">
-            <label>How heigh do you want your shapes to be?
-                <input type="number" name="height" class="height" value="3">
+            <label>How high do you want your shapes to be?
+                <input type="number" name="height" class="height" min="0" max="50" value="3">
             </label>
         </div>
         <div class="form-general__field">
-            <input type="submit" value="Determine width" class="form-general__submit-button">
+            <input type="submit" value="Make shapes" class="form-general__submit-button">
         </div>
 
     </form>
 
+    <button class="clear">clear shapes</button>
 
 
 

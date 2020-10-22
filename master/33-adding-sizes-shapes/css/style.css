@@ -22,8 +22,22 @@ canvas {
 }
 
 .title{
-  font-size: 4rem;
-  color:purple;
   display: block;
+  margin:0.4rem;
+}
+
+.form-general__submit-button{
+  padding:1.1rem;
+  background: rgba(63,94,251,1);
+  border: none;
+  color:white;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  border-radius: 50rem 50rem;
+  margin: 0.8rem;
+}
+
+.form-general__field{
+  margin-bottom: 0.4rem;
 }
 

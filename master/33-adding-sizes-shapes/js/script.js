@@ -83,17 +83,47 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
 
+  const group = new THREE.Group();
   const handleSubmitForm = e => {
     e.preventDefault();
     renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
     const amount = document.querySelector(`.amount`).value;
     const width = document.querySelector(`.width`).value;
     const height = document.querySelector(`.height`).value;
-
-
     const geometry = geometries[Math.floor(Math.random() * geometries.length)];
     createBoxes(group, geometry, farDist, amount, width, height);
 
+    // // scene.remove(scene.children.group);
+    // if (scene.children.group !== undefined) {
+    //   console.log(scene.children.group.children);
+    //   scene.remove(scene.children[4]);
+    //   console.log(scene.children[4]);
+    // }
+
+    // // for (let i = scene.children.length - 1; i >= 0; i--) {
+    // //   console.log(scene.children.length);
+    // //   obj = scene.children[i];
+    // //   scene.remove(obj);
+    // // }
+    // console.log(scene.children[3]);
+    // console.log(scene.children.length);
+    // console.log(scene.children);
+    // scene.remove(scene.children[3]);
+    // // scene.remove(scene.children[4]);
+
+    // if (scene.children.length = 4) {
+    //   scene.remove(scene.children.group)
+    // }
+
+    // for (let i = scene.children.group.children.length - 1; i >= 0; i--) {
+    //   group.remove(group.children[i]);
+    // }
+
+
+    // scene.remove(group);
+
+
+    scene.add(group);
   }
 
 
@@ -101,7 +131,7 @@ import { createBoxes } from "./functions/createBoxes.js";
   // NAAM OPVANGEN EN 3D renderen
   const textMesh = new THREE.Mesh();
   let nameForm;
-  const group = new THREE.Group();
+
   recognition.onresult = (event) => {
     console.log(`a`);
     nameForm = event.results[0][0].transcript;
@@ -113,12 +143,8 @@ import { createBoxes } from "./functions/createBoxes.js";
     loader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
       createTypo(font, nameForm, textMesh, material, center);
     });
-
+    scene.add(textMesh);
   }
-
-
-  scene.add(textMesh);
-  scene.add(group);
 
 
 
@@ -133,7 +159,7 @@ import { createBoxes } from "./functions/createBoxes.js";
       intersects[i].object.material.color.set(randomColor);
       intersects[i].object.material.wireframe = true;
       // intersects[i].object.material.scale = 3;
-      console.log(intersects[i].object.material);
+      // console.log(intersects[i].object.material);
     }
 
     // how to get mouse coordinate
@@ -145,11 +171,32 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
 
+
+
+
+  const handleClear = e => {
+    e.preventDefault();
+    if (scene.children.length >= 4) {
+      // scene.remove(scene.children[0]);
+      scene.remove(group.children);
+
+
+      for (let i = group.children.length - 1; i >= 0; i--) {
+        group.remove(group.children[i]);
+      }
+
+    }
+  }
+
+
+
+
+
   const animate = () => {
 
     requestAnimationFrame(animate);
-    scene.children[0].rotation.x += 5;
-    scene.rotation.x -= 0.00090;
+    // scene.children[0].rotation.x += 5;
+    scene.rotation.x += 0.00090;
     scene.rotation.y += 0.00090;
     group.rotation.x = Date.now() * 0.000005;
     group.rotation.y = Date.now() * 0.0000025;
@@ -158,8 +205,6 @@ import { createBoxes } from "./functions/createBoxes.js";
 
     renderer.render(scene, camera);
   }
-
-
 
 
 
@@ -192,7 +237,8 @@ import { createBoxes } from "./functions/createBoxes.js";
       $diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
     }
 
-
+    // kan de scenen nog niet leegmaken!
+    document.querySelector(`.clear`).addEventListener(`click`, handleClear);
 
 
   }

@@ -5,7 +5,7 @@ const createTypo = (font, nameForm, textMesh, material, center) => {
     const word = nameForm;
     const typoProperties = {
         font: font,
-        size: 100,
+        size: 130,
         height: 5,
         curveSegments: 12,
         bevelEnabled: true,
