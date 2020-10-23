@@ -28,7 +28,7 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
   const farDist = 10000;
-  const sizeText = 500;
+  const sizeText = 300;
 
   //SETTING UP 3D SCENERY
   let scene = new THREE.Scene();
@@ -112,6 +112,7 @@ import { createBoxes } from "./functions/createBoxes.js";
   const handleSubmitForm = e => {
     e.preventDefault();
     const $form = e.currentTarget;
+    console.log($form);
     renderer.setClearColor(colors[Math.floor(Math.random() * colors.length)]);
     const amount = $form.querySelector(`.amount`).value;
     const width = $form.querySelector(`.width`).value;
@@ -170,12 +171,14 @@ import { createBoxes } from "./functions/createBoxes.js";
   }
 
 
+
   const animate = () => {
+
     requestAnimationFrame(animate);
     scene.rotation.x += 0.00090;
     scene.rotation.y += -0.00090;
     group.rotation.x = Date.now() * -0.00005;
-    group.rotation.y = Date.now() * 0.0000025;
+    group.rotation.y = (Date.now() * 0.0000025);
 
     renderer.render(scene, camera);
   }
@@ -183,7 +186,10 @@ import { createBoxes } from "./functions/createBoxes.js";
 
 
   const init = () => {
+
+
     animate();
+
 
     let colorInput = document.querySelector('#color');
 
@@ -222,7 +228,6 @@ import { createBoxes } from "./functions/createBoxes.js";
     document.querySelector(`.play`).addEventListener(`click`, handlePlayMusic);
 
     document.querySelector(`.stop`).addEventListener(`click`, handleStopMusic);
-
 
 
 
